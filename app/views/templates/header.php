@@ -5,23 +5,64 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Halaman <?= $data["title"]; ?></title>
-  <link rel="stylesheet" href="<?= BASEURL; ?>/css/bootstrap.css">
+  <link rel="stylesheet" href="<?= BASEURL; ?>/css/output.css">
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container">
-      <a class="navbar-brand" href="<?= BASEURL; ?>/dashboard">PHP MVC</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <a class="nav-link active" aria-current="page" href="<?= BASEURL; ?>/dashboard">Home</a>
-          <a class="nav-link" href="<?= BASEURL; ?>/about">About</a>
-          <a class="nav-link" href="<?= BASEURL; ?>/mahasiswa">Mahasiswa</a>
-          <a class="nav-link" href="<?= BASEURL; ?>/logout/handleLogout">Logout</a>
+  <!-- TODO: JIKA UDAH LOGIN, MUNCULKAN NAVBAR -->
+  <div class="drawer">
+    <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
+    <div class="drawer-side">
+      <label for="my-drawer-3" aria-label="close sidebar" class="drawer-overlay"></label>
+      <ul class="menu bg-base-200 min-h-full w-80 p-4">
+        <!-- Sidebar content here -->
+        <li><a class="nav-link active" aria-current="page" href="<?= BASEURL; ?>/dashboard">Home</a></li>
+        <li><a class="nav-link" href="<?= BASEURL; ?>/about">About</a></li>
+        <li><a class="nav-link" href="<?= BASEURL; ?>/mahasiswa">Mahasiswa</a></li>
+      </ul>
+    </div>
+    <div class="drawer-content flex flex-col">
+      <!-- Navbar -->
+      <div class="navbar bg-base-300 w-full">
+        <div class="flex-none lg:hidden">
+          <label for="my-drawer-3" aria-label="open sidebar" class="btn btn-square btn-ghost">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              class="inline-block h-6 w-6 stroke-current">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </label>
+        </div>
+        <div class="flex-1">
+          <a class="mx-2 px-2 bg-red-500" href="<?= BASEURL; ?>/dashboard">Koperasi Sawit</a>
+        </div>
+        <div class="hidden flex-none lg:block">
+          <ul class="menu menu-horizontal">
+            <!-- Navbar menu content here -->
+            <li><a class="nav-link active" aria-current="page" href="<?= BASEURL; ?>/dashboard">Home</a></li>
+            <li><a class="nav-link" href="<?= BASEURL; ?>/product">Product</a></li>
+            <li><a class="nav-link" href="<?= BASEURL; ?>/employee">Employee</a></li>
+          </ul>
+          <div class="dropdown dropdown-end">
+            <button type="button" class="btn btn-ghost btn-circle avatar">
+              <div class="w-10 rounded-full">
+                <img
+                  alt="Tailwind CSS Navbar component"
+                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+              </div>
+            </button>
+            <ul class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+              <li><a class="justify-between">Profile</a></li>
+              <li><a class="nav-link" href="<?= BASEURL; ?>/logout/handleLogout">Logout</a></li>
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
-  </nav>
+
+      <!-- Page content here -->
