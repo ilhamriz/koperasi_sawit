@@ -2,6 +2,15 @@
 
 class Employee extends Controller
 {
+  public function __construct()
+  {
+    $role = $_SESSION['user']['role'];
+    if ($role != 1) {
+      header("Location: " . BASEURL . "/dashboard");
+      exit;
+    }
+  }
+
   public function index()
   {
     $data['title'] = "Employee";
