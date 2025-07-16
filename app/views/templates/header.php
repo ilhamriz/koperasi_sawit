@@ -31,6 +31,9 @@ $role = $_SESSION['user']['role'] ?? null;
         <?php if ($role == 2): ?>
           <li><a class="nav-link" href="<?= BASEURL; ?>/order">Order</a></li>
         <?php endif; ?>
+
+        <li><a class="justify-between" href="<?= BASEURL; ?>/profile">Profile</a></li>
+        <li><a class="nav-link" href="<?= BASEURL; ?>/logout/handleLogout" onclick="return confirm('Are you sure you want to logout?');">Logout</a></li>
       </ul>
     </div>
     <div class="drawer-content flex flex-col">
@@ -81,7 +84,7 @@ $role = $_SESSION['user']['role'] ?? null;
               </button>
               <ul class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
                 <li><a class="justify-between" href="<?= BASEURL; ?>/profile">Profile</a></li>
-                <li><a class="nav-link" href="<?= BASEURL; ?>/logout/handleLogout">Logout</a></li>
+                <li><a class="nav-link" href="<?= BASEURL; ?>/logout/handleLogout" onclick="return confirm('Are you sure you want to logout?');">Logout</a></li>
               </ul>
             </div>
           </div>
