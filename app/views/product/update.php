@@ -14,7 +14,7 @@
   <fieldset class="fieldset">
     <legend class="fieldset-legend">Image</legend>
     <input type="file" name="image" accept="image/*" class="file-input" />
-    <small>Current: <img src="<?= BASEURL; ?>/img/uploads/<?= $data['product']['image']; ?>" width="50" alt="Product"></small>
+    <small>Current: <img src="<?= BASEURL; ?>/public/img/uploads/<?= $data['product']['image']; ?>" width="50" alt="Product"></small>
   </fieldset>
 
   <button type="submit" class="btn btn-primary">Update</button>

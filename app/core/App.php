@@ -32,7 +32,7 @@ class App
         // Blok akses ke login dan register jika sudah login
         $this->controller = "Dashboard";
         $url = [];
-      } elseif (file_exists("../app/controllers/" . $requestedController . ".php")) {
+      } elseif (file_exists("app/controllers/" . $requestedController . ".php")) {
         $this->controller = $requestedController;
         unset($url[0]);
       } else {
@@ -42,7 +42,7 @@ class App
       }
     }
 
-    require_once "../app/controllers/" . $this->controller . ".php";
+    require_once "app/controllers/" . $this->controller . ".php";
     $this->controller = new $this->controller;
 
     // METHOD

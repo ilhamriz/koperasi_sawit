@@ -19,7 +19,7 @@
       <td><?= $p['name']; ?></td>
       <td><?= $p['total']; ?></td>
       <td>
-        <img src="<?= BASEURL; ?>/img/uploads/<?= $p['image']; ?>" alt="" width="50">
+        <img src="<?= BASEURL; ?>/public/img/uploads/<?= $p['image']; ?>" alt="" width="50">
       </td>
       <td><?= $p['updated_at']; ?></td>
       <td>

@@ -1,9 +1,18 @@
 <?php
 
-define("BASEURL", "http://localhost/koperasi_sawit/public");
+// Detect environment
+$server_name = $_SERVER['SERVER_NAME'] ?? 'localhost';
 
-// DB
-define("DB_HOST", "localhost");
-define("DB_USER", "root");
-define("DB_PASS", "");
-define("DB_NAME", "koperasi_sawit");
+if ($server_name === 'localhost') {
+  $envFile = __DIR__ . '/../../.env.local';
+} else {
+  $envFile = __DIR__ . '/../../.env.production';
+}
+
+$env = parse_ini_file($envFile);
+
+define("BASEURL", $env['BASEURL']);
+define("DB_HOST", $env['DB_HOST']);
+define("DB_USER", $env['DB_USER']);
+define("DB_PASS", $env['DB_PASS']);
+define("DB_NAME", $env['DB_NAME']);
