@@ -1,5 +1,10 @@
 <div class="min-h-screen bg-gray-900 text-white px-6 py-10">
   <div class="max-w-3xl mx-auto bg-gray-800 p-8 rounded-xl shadow space-y-8">
+    <!-- Back Button -->
+    <a href="<?= BASEURL ?>/order" class="inline-block">
+      <button class="btn btn-outline btn-primary">← Back</button>
+    </a>
+
     <h2 class="text-2xl font-bold text-center">Create New Loan Request</h2>
 
     <form method="POST" action="<?= BASEURL; ?>/order/handleCreate" class="space-y-6">
