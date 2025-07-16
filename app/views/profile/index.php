@@ -1,34 +1,57 @@
-<div class="w-full max-w-sm mx-auto mt-10 p-6 bg-base-100 rounded-xl shadow-md">
+<div class="min-h-screen flex items-center justify-center bg-gray-900 text-white px-4 py-12">
+  <div class="w-full max-w-sm bg-gray-800 p-6 rounded-xl shadow-lg space-y-6">
 
-  <h2 class="text-2xl font-semibold mb-6 text-center">My Profile</h2>
+    <!-- Heading -->
+    <h2 class="text-2xl font-semibold text-center">My Profile</h2>
 
-  <?php if (!empty($_SESSION['flash_error'])): ?>
-    <div class="alert alert-error mb-4">
-      <span><?= $_SESSION['flash_error'];
-            unset($_SESSION['flash_error']); ?></span>
-    </div>
-  <?php endif; ?>
+    <!-- Flash Error -->
+    <?php if (!empty($_SESSION['flash_error'])): ?>
+      <div class="alert alert-error text-sm">
+        <span><?= $_SESSION['flash_error'];
+              unset($_SESSION['flash_error']); ?></span>
+      </div>
+    <?php endif; ?>
 
-  <?php if (!empty($_SESSION['flash_success'])): ?>
-    <div class="alert alert-success mb-4">
-      <span><?= $_SESSION['flash_success'];
-            unset($_SESSION['flash_success']); ?></span>
-    </div>
-  <?php endif; ?>
+    <!-- Flash Success -->
+    <?php if (!empty($_SESSION['flash_success'])): ?>
+      <div class="alert alert-success text-sm">
+        <span><?= $_SESSION['flash_success'];
+              unset($_SESSION['flash_success']); ?></span>
+      </div>
+    <?php endif; ?>
 
-  <form method="POST" action="<?= BASEURL; ?>/profile/update" class="space-y-4">
-    <fieldset class="fieldset">
-      <legend class="fieldset-legend">Name</legend>
-      <input type="text" name="name" class="input" placeholder="Profile Name" value="<?= $data['user']['name']; ?>" required />
-    </fieldset>
+    <!-- Form -->
+    <form method="POST" action="<?= BASEURL; ?>/profile/update" class="space-y-4">
 
-    <fieldset class="fieldset">
-      <legend class="fieldset-legend">Email</legend>
-      <input type="email" name="email" value="<?= $data['user']['email']; ?>" class="input" placeholder="Profile Name" required />
-    </fieldset>
+      <!-- Name -->
+      <div>
+        <label for="name" class="block text-sm font-medium mb-1">Name</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          value="<?= $data['user']['name']; ?>"
+          class="input input-bordered w-full bg-gray-700 text-white border-gray-600 placeholder-gray-400"
+          placeholder="Profile Name"
+          required />
+      </div>
 
-    <div class="form-control mt-6">
-      <button type="submit" class="btn btn-primary w-full">Update</button>
-    </div>
-  </form>
+      <!-- Email -->
+      <div>
+        <label for="email" class="block text-sm font-medium mb-1">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          value="<?= $data['user']['email']; ?>"
+          class="input input-bordered w-full bg-gray-700 text-white border-gray-600 placeholder-gray-400"
+          placeholder="Email Address"
+          required />
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" class="btn btn-primary w-full mt-4">Update</button>
+    </form>
+
+  </div>
 </div>

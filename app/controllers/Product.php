@@ -39,7 +39,7 @@ class Product extends Controller
       $original = $_FILES['image']['name'];
       $ext = pathinfo($original, PATHINFO_EXTENSION);
       $imageName = uniqid() . "." . $ext;
-      move_uploaded_file($tmp, "../public/img/uploads/" . $imageName);
+      move_uploaded_file($tmp, "public/img/uploads/" . $imageName);
     }
 
     $data = [
@@ -75,7 +75,7 @@ class Product extends Controller
       $original = $_FILES['image']['name'];
       $ext = pathinfo($original, PATHINFO_EXTENSION);
       $imageName = uniqid() . "." . $ext;
-      move_uploaded_file($tmp, "../public/img/uploads/" . $imageName);
+      move_uploaded_file($tmp, "public/img/uploads/" . $imageName);
     }
 
     $data = [

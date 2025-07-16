@@ -18,10 +18,19 @@ $role = $_SESSION['user']['role'] ?? null;
     <div class="drawer-side">
       <label for="my-drawer-3" aria-label="close sidebar" class="drawer-overlay"></label>
       <ul class="menu bg-base-200 min-h-full w-80 p-4">
-        <!-- Sidebar content here -->
-        <li><a class="nav-link active" aria-current="page" href="<?= BASEURL; ?>/dashboard">Home</a></li>
-        <li><a class="nav-link" href="<?= BASEURL; ?>/about">About</a></li>
-        <li><a class="nav-link" href="<?= BASEURL; ?>/mahasiswa">Mahasiswa</a></li>
+        <li><a class="nav-link" aria-current="page" href="<?= BASEURL; ?>/dashboard">Home</a></li>
+
+        <!-- ONLY FOR ADMIN -->
+        <?php if ($role == 1): ?>
+          <li><a class="nav-link" href="<?= BASEURL; ?>/product">Product</a></li>
+          <li><a class="nav-link" href="<?= BASEURL; ?>/order/review">Review</a></li>
+          <li><a class="nav-link" href="<?= BASEURL; ?>/employee">Employee</a></li>
+        <?php endif; ?>
+
+        <!-- ONLY FOR EMPLOYEE -->
+        <?php if ($role == 2): ?>
+          <li><a class="nav-link" href="<?= BASEURL; ?>/order">Order</a></li>
+        <?php endif; ?>
       </ul>
     </div>
     <div class="drawer-content flex flex-col">

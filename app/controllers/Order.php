@@ -56,10 +56,10 @@ class Order extends Controller
     }
   }
 
-  public function detail($id)
+  public function detail($id, $userIdByAdmin = null)
   {
     $data['title'] = "Request Order";
-    $userId = $_SESSION['user']['id'];
+    $userId = $userIdByAdmin ?? $_SESSION['user']['id'];
     $data['order'] = $this->model('OrderModel')->getByIdAndUser($id, $userId);
     $data['items'] = $this->model('OrderItemModel')->getByOrderId($id);
 
@@ -73,9 +73,9 @@ class Order extends Controller
     $this->view("templates/footer");
   }
 
-  public function delete($id)
+  public function delete($id, $userIdByAdmin = null)
   {
-    $userId = $_SESSION['user']['id'];
+    $userId = $userIdByAdmin ?? $_SESSION['user']['id'];
 
     $order = $this->model('OrderModel')->getByIdAndUser($id, $userId);
 
@@ -87,7 +87,8 @@ class Order extends Controller
     // delete order & order_items
     $this->model('OrderModel')->delete($id);
 
-    header("Location: " . BASEURL . "/order");
+    $backURL = $userIdByAdmin ? "/order/review" : "/order";
+    header("Location: " . BASEURL . $backURL);
     exit;
   }
 
