@@ -90,4 +90,56 @@ class Order extends Controller
     header("Location: " . BASEURL . "/order");
     exit;
   }
+
+  public function review($status = null)
+  {
+    if ($_SESSION['user']['role'] != 1) {
+      header("Location: " . BASEURL . "/dashboard");
+      exit;
+    }
+
+    $data['title'] = "Review";
+    $data['status'] = $status;
+    $data['orders'] = $this->model('OrderModel')->getAllFiltered($status);
+
+    $this->view("templates/header", $data);
+    $this->view("order/review", $data);
+    $this->view("templates/footer");
+  }
+
+  public function approve($id)
+  {
+    if ($_SESSION['user']['role'] != 1) {
+      header("Location: " . BASEURL . "/dashboard");
+      exit;
+    }
+
+    $this->model('OrderModel')->updateStatus($id, 'accepted');
+    header("Location: " . BASEURL . "/order/review");
+    exit;
+  }
+
+  public function reject($id)
+  {
+    if ($_SESSION['user']['role'] != 1) {
+      header("Location: " . BASEURL . "/dashboard");
+      exit;
+    }
+
+    $this->model('OrderModel')->updateStatus($id, 'rejected');
+    header("Location: " . BASEURL . "/order/review");
+    exit;
+  }
+
+  public function undo($id)
+  {
+    if ($_SESSION['user']['role'] != 1) {
+      header("Location: " . BASEURL . "/dashboard");
+      exit;
+    }
+
+    $this->model('OrderModel')->updateStatus($id, 'pending');
+    header("Location: " . BASEURL . "/order/review");
+    exit;
+  }
 }

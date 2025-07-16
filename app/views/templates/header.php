@@ -53,6 +53,7 @@ $role = $_SESSION['user']['role'] ?? null;
               <!-- ONLY FOR ADMIN -->
               <?php if ($role == 1): ?>
                 <li><a class="nav-link" href="<?= BASEURL; ?>/product">Product</a></li>
+                <li><a class="nav-link" href="<?= BASEURL; ?>/order/review">Review</a></li>
                 <li><a class="nav-link" href="<?= BASEURL; ?>/employee">Employee</a></li>
               <?php endif; ?>
 
