@@ -1,5 +1,7 @@
 <?php
 
+require_once "Flasher.php";
+
 class Order extends Controller
 {
   public function index()
@@ -108,38 +110,46 @@ class Order extends Controller
     $this->view("templates/footer");
   }
 
-  public function approve($id)
+  public function handleStatus($status, $id)
   {
     if ($_SESSION['user']['role'] != 1) {
       header("Location: " . BASEURL . "/dashboard");
       exit;
     }
 
-    $this->model('OrderModel')->updateStatus($id, 'accepted');
-    header("Location: " . BASEURL . "/order/review");
-    exit;
-  }
+    $orderItems = $this->model('OrderModel')->getOrderItems($id);
 
-  public function reject($id)
-  {
-    if ($_SESSION['user']['role'] != 1) {
-      header("Location: " . BASEURL . "/dashboard");
-      exit;
+    // Reduce stock if status is "accepted"
+    if ($status === 'accepted') {
+      foreach ($orderItems as $item) {
+        $product = $this->model('ProductModel')->getById($item['product_id']);
+
+        if ($item['quantity'] > $product['total']) {
+          Flasher::setFlash("Not enough stock for product '{$product['name']}'", 'error');
+          header('Location: ' . BASEURL . '/order/review');
+          exit;
+        }
+      }
+
+      // Reduce product total stock
+      foreach ($orderItems as $item) {
+        $this->model('ProductModel')->reduceStock($item['product_id'], $item['quantity']);
+      }
+
+      $message = "Order accepted and stock updated";
+    } elseif ($status === 'pending') {
+      foreach ($orderItems as $item) {
+        $this->model('ProductModel')->revertStock($item['product_id'], $item['quantity']);
+      }
+      $message = "Order updated";
+    } else {
+      $message = "Order rejected";
     }
 
-    $this->model('OrderModel')->updateStatus($id, 'rejected');
-    header("Location: " . BASEURL . "/order/review");
-    exit;
-  }
+    // STATUS => 'pending', 'accepted', 'rejected'
+    $this->model('OrderModel')->updateStatus($id, $status);
 
-  public function undo($id)
-  {
-    if ($_SESSION['user']['role'] != 1) {
-      header("Location: " . BASEURL . "/dashboard");
-      exit;
-    }
-
-    $this->model('OrderModel')->updateStatus($id, 'pending');
+    Flasher::setFlash($message);
     header("Location: " . BASEURL . "/order/review");
     exit;
   }

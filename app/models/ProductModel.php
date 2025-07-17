@@ -50,4 +50,20 @@ class ProductModel
     $this->db->bind(':id', $id);
     $this->db->execute();
   }
+
+  public function reduceStock($productId, $qty)
+  {
+    $this->db->query("UPDATE products SET total = total - :qty WHERE id = :id");
+    $this->db->bind(':id', $productId);
+    $this->db->bind(':qty', $qty);
+    $this->db->execute();
+  }
+
+  public function revertStock($productId, $qty)
+  {
+    $this->db->query("UPDATE products SET total = total + :qty WHERE id = :id");
+    $this->db->bind(':id', $productId);
+    $this->db->bind(':qty', $qty);
+    $this->db->execute();
+  }
 }

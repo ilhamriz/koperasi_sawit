@@ -77,13 +77,13 @@ class OrderModel
   public function getAllFiltered($status = null)
   {
     $query = "
-    SELECT o.*, u.name AS user_name,
-      GROUP_CONCAT(p.name, ':', oi.quantity SEPARATOR ', ') AS items
-    FROM orders o
-    JOIN users u ON o.user_id = u.id
-    LEFT JOIN order_items oi ON o.id = oi.order_id
-    LEFT JOIN products p ON oi.product_id = p.id
-  ";
+      SELECT o.*, u.name AS user_name,
+        GROUP_CONCAT(p.name, ':', oi.quantity SEPARATOR ', ') AS items
+      FROM orders o
+      JOIN users u ON o.user_id = u.id
+      LEFT JOIN order_items oi ON o.id = oi.order_id
+      LEFT JOIN products p ON oi.product_id = p.id
+    ";
 
     if ($status && in_array($status, ['pending', 'accepted', 'rejected', 'cancelled'])) {
       $query .= " WHERE o.status = :status";
@@ -100,12 +100,18 @@ class OrderModel
     return $this->db->resultSet();
   }
 
-
   public function updateStatus($id, $status)
   {
     $this->db->query("UPDATE orders SET status = :status WHERE id = :id");
     $this->db->bind(':status', $status);
     $this->db->bind(':id', $id);
     $this->db->execute();
+  }
+
+  public function getOrderItems($orderId)
+  {
+    $this->db->query("SELECT * FROM order_items WHERE order_id = :order_id");
+    $this->db->bind(':order_id', $orderId);
+    return $this->db->resultSet();
   }
 }

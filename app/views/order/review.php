@@ -50,10 +50,10 @@ function isActiveTab($tab, $currentStatus)
               </td>
               <td class="space-x-2">
                 <?php if ($order['status'] === 'pending'): ?>
-                  <a href="<?= BASEURL; ?>/order/approve/<?= $order['id']; ?>" class="btn btn-success btn-sm">Accept</a>
-                  <a href="<?= BASEURL; ?>/order/reject/<?= $order['id']; ?>" class="btn btn-error btn-sm">Reject</a>
+                  <a href="<?= BASEURL; ?>/order/handleStatus/accepted/<?= $order['id']; ?>" class="btn btn-success btn-sm">Accept</a>
+                  <a href="<?= BASEURL; ?>/order/handleStatus/rejected/<?= $order['id']; ?>" class="btn btn-error btn-sm">Reject</a>
                 <?php else: ?>
-                  <a href="<?= BASEURL; ?>/order/undo/<?= $order['id']; ?>" class="btn btn-outline btn-sm">Undo</a>
+                  <a href="<?= BASEURL; ?>/order/handleStatus/pending/<?= $order['id']; ?>" class="btn btn-outline btn-sm">Undo</a>
                 <?php endif; ?>
               </td>
             </tr>

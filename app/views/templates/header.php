@@ -13,6 +13,15 @@ $role = $_SESSION['user']['role'] ?? null;
 </head>
 
 <body>
+  <?php if (isset($_SESSION['flash'])): ?>
+    <div class="toast toast-top toast-center z-10">
+      <div class="alert alert-<?= $_SESSION['flash']['type']; ?>">
+        <span><?= $_SESSION['flash']['message']; ?></span>
+      </div>
+    </div>
+    <?php unset($_SESSION['flash']); ?>
+  <?php endif; ?>
+
   <div class="drawer">
     <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
     <div class="drawer-side">
